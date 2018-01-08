@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Helloworld</title>
+</head>
+
+<body>
+    <h1>vue.directives 实例</h1>
+    <hr>
+    <div id="app">
+        <div v-jspang="color">{{num}}</div>
+        <p>
+            <button v-on:click="add">ADD</button>
+        </p>
+    </div>
+
+    <p>
+        <button onclick="unbind()">unbind</button>
+    </p>
+
+    <script type="text/javascript">
+        function unbind(){
+            app.$destroy();
+        }
+        // Vue.directive("jspang", function (el, bingding) {
+            // console.log(el);
+            // console.log(bingding);
+            // console.log(bingding.name);
+            // console.log(bingding.value);
+            // console.log(bingding.expression);
+            // el.style = "color:" + bingding.value
+        // });
+
+        Vue.directive("jspang", {
+            bind: function(el,binding) {//被绑定
+                console.log('1 - bind');
+                el.style='color:'+binding.value;
+            },
+            inserted:function () {//绑定到节点
+                console.log('2 - inserted');
+            },
+            update: function () {//组件更新
+                console.log('3 - update');
+            },
+            componentUpdated: function () {//组件更新完成
+                console.log('4 - componentUpdated');
+            },
+            unbind: function () {//解绑
+                console.log('5 - unbind');
+            }
+        }
+    );
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                color: 'red'
+            },
+            methods: {
+                add: function () {
+                    this.num++
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
