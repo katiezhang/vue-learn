@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed 计算属性</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>computed 计算属性</h1>
+    <hr>
+    <div id="app">
+        <p>{{newPrice}}</p>
+        <ul>
+            <li v-for="news in reversNews">{{news.title}}--{{news.data}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var newsList = [
+            { title: '国务院新闻1', data: '2017.1.1' },
+            { title: '国务院新闻2', data: '2017.1.2' },
+            { title: '国务院新闻3', data: '2017.1.3' },
+            { title: '国务院新闻4', data: '2017.1.4' },
+        ]
+        var app = new Vue({
+            el: '#app',
+            data: {
+                price: 100,
+                newsList: newsList
+            },
+            computed: {
+                newPrice: function () {
+                    return this.price = '$' + this.price + '美元'
+                },
+                reversNews:function(){
+                    return this.newsList.reverse();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
